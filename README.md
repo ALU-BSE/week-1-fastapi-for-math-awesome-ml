@@ -20,6 +20,10 @@ This FastAPI application demonstrates how to perform matrix multiplication (MX +
 
 **API Endpoints**
 
+To navigate to the endpoint first open the application in the browser with one of the following links:
+* Hosted render link: https://week-1-fastapi-for-math-awesome-ml.onrender.com/docs
+* local link: http://127.0.0.1:8000/docs
+
 *   **POST /calculate** (JSON request):
     *   Takes a JSON object with a `matrix` key containing a 5x5 list of lists representing your matrix.
     *   Returns a JSON object with the following keys:
