@@ -16,7 +16,13 @@ def matrix_multiply_with_numpy(M, X, B):
     return result
 
 def matrix_multiply_without_numpy(M, X, B):
-    result = [[sum(M[i][k] * X[k][j] for k in range(len(X))) + B[i][j] for j in range(len(X[0]))] for i in range(len(M))]
+    result = []
+    for i in range(len(M)):
+        row = []
+        for j in range(len(X[0])):
+            sum_product = sum(M[i][k] * X[k][j] for k in range(len(X)))
+            row.append(sum_product + B[i])
+        result.append(row)
     return result
 
 @app.post("/calculate")
