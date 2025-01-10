@@ -15,6 +15,10 @@ def matrix_multiply_with_numpy(M, X, B):
     result = np.dot(M, X) + B
     return result
 
+def matrix_multiply_without_numpy(M, X, B):
+    result = [[sum(M[i][k] * X[k][j] for k in range(len(X))) + B[i][j] for j in range(len(X[0]))] for i in range(len(M))]
+    return result
+
 @app.post("/calculate")
 async def calculate(request: MatrixRequest):
     pass
