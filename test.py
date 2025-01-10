@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException
 from pydantic import BaseModel
 import numpy as np
 import uvicorn
@@ -44,18 +44,22 @@ async def calculate(request: MatrixRequest):
     ])
 
     X = np.array(request.matrix)
+
+    try:
     
-    result_np = matrix_multiply_with_numpy(M, X, B)
+        result_np = matrix_multiply_with_numpy(M, X, B)
 
-    result_no_np = matrix_multiply_without_numpy(M, X, B)
+        result_no_np = matrix_multiply_without_numpy(M.tolist(), X.tolist(), B.tolist())
 
-    sigmoid_result = sigmoid(result_np)
+        sigmoid_result = sigmoid(result_np)
 
-    return {
-        "matrix_multiplication": result_np.tolist(),
-        "non_numpy_multiplication": result_no_np,  
-        "sigmoid_output": sigmoid_result.tolist()
-    }
+        return {
+            "matrix_multiplication": result_np.tolist(),
+            "non_numpy_multiplication": result_no_np,  
+            "sigmoid_output": sigmoid_result.tolist()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
