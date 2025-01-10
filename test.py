@@ -51,5 +51,11 @@ async def calculate(request: MatrixRequest):
 
     sigmoid_result = sigmoid(result_np)
 
+    return {
+        "matrix_multiplication": result_np.tolist(),
+        "non_numpy_multiplication": result_no_np,  
+        "sigmoid_output": sigmoid_result.tolist()
+    }
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
