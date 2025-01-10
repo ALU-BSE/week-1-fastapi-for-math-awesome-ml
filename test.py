@@ -27,7 +27,23 @@ def matrix_multiply_without_numpy(M, X, B):
 
 @app.post("/calculate")
 async def calculate(request: MatrixRequest):
-    pass
+    M = np.array([
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14, 15],
+        [16, 17, 18, 19, 20],
+        [21, 22, 23, 24, 25]
+    ])
+    
+    B = np.array([
+        [1, 1, 1, 1, 1],
+        [2, 2, 2, 2, 2],
+        [3, 3, 3, 3, 3],
+        [4, 4, 4, 4, 4],
+        [5, 5, 5, 5, 5]
+    ])
+
+    X = np.array(request.matrix)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
