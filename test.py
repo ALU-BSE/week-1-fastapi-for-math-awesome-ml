@@ -11,6 +11,9 @@ def sigmoid(x):
 class MatrixRequest(BaseModel):
     matrix: list[list[float]]
 
+def matrix_multiply_with_numpy(M, X, B):
+    result = np.dot(M, X) + B
+    return result
 
 @app.post("/calculate")
 async def calculate(request: MatrixRequest):
